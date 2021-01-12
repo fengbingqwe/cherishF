@@ -1,0 +1,17 @@
+C:\test\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.exe.config
+C:\test\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.exe
+C:\test\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.pdb
+C:\test\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.csprojResolveAssemblyReference.cache
+C:\test\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.exe
+C:\test\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.pdb
+C:\test\ConsoleFile\ConsoleFile\bin\Debug\Ionic.Zip.dll
+F:\code\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.exe.config
+F:\code\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.exe
+F:\code\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.pdb
+F:\code\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.csprojResolveAssemblyReference.cache
+F:\code\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.exe
+F:\code\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.pdb
+F:\code\ConsoleFile\ConsoleFile\bin\Debug\Ionic.Zip.dll
+F:\code\Test\cherishF\ConsoleFile\ConsoleFile\bin\Debug\ConsoleFile.exe.config
+F:\code\Test\cherishF\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.exe
+F:\code\Test\cherishF\ConsoleFile\ConsoleFile\obj\Debug\ConsoleFile.pdb
