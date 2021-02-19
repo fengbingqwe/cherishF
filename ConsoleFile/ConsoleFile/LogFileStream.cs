@@ -42,7 +42,6 @@ namespace ConsoleFile
         private bool first;
         private long _block;
         private long _allBlock;
-        private long _lave;
         private List<LogRetrieveDto> _regexListDto;
         private List<LogRetrieveDto> _exactListDto;
         private int _count = 1024;
@@ -55,7 +54,7 @@ namespace ConsoleFile
            : base(path, mode, access, share)
         {
             Console.WriteLine("path:{0}", path);
-            var _listDto = listDto;
+           var _listDto = listDto;
             _regexListDto = new List<LogRetrieveDto>();
             _exactListDto = new List<LogRetrieveDto>();
             foreach (var item in _listDto)
@@ -76,7 +75,7 @@ namespace ConsoleFile
 
         public override int Read(byte[] array, int offset, int count)
         {
-            if (count > array.Length)
+             if (count > array.Length)
             {
                 count = array.Length;
             }
@@ -98,20 +97,17 @@ namespace ConsoleFile
         }
         private bool FillBuffer()
         {
-            try
-            {
-                if (dd == 100)
-                {
-                    var ff = 0;
-                }
-                length = _reader.BaseStream.Length;
+            length = _reader.BaseStream.Length;
                 string line = string.Empty;
                 //int length = 0;
                 int bufferSize = 1024 * 1024 * _size;
                 // 是否读取下一行
                 if (length < _size * 1024 * 1024)
                 {
-                    line = _reader.ReadToEnd();
+                    if (!(_reader.BaseStream.Position > 0 && _reader.BaseStream.Position < _reader.BaseStream.Length))
+                    {
+                        line = _reader.ReadToEnd();
+                    }
                     //line = _reader.ReadLine();
                     string _lineString = line;
                     //if (line == null) return false;
@@ -127,22 +123,17 @@ namespace ConsoleFile
                         // 需要读几次10M块
                         _block = length / bufferSize;
                         _allBlock = length / bufferSize;
-                        // 剩余不足10M的数据长度
-                        _lave = length % bufferSize;
                         first = false;
                         _reader.BaseStream.Seek(0, SeekOrigin.Begin);
                     }
                     if (_block < 0)
                     {
-                        //_start = 0;
                         _block = 0;
-                        _lave = 0;
                         _allBlock = 0;
                         return false;
                     }
                     if (_block == 0)
                     {
-                        bufferSize = (int)_lave;
                         if (bufferSize == 0) return false;
                     }
                     // 读取块
@@ -152,37 +143,19 @@ namespace ConsoleFile
                         _reader.DiscardBufferedData();
                     }
                     _start = _reader.BaseStream.Position;
-
-                    if (_block == 1)
-                    {
-                        _lave = _allBlock * 1024 * 1024 * _size + _lave - _start;
-                        if (_lave < 0)
-                        {
-                            _start = 0;
-                            _block = 0;
-                            _lave = 0;
-                            _allBlock = 0;
-                            return false;
-                        }
-                    }
-                    char[] buffer = new Char[bufferSize];
-                    var dufferLength = buffer.Length;
-                    read = _reader.Read(buffer, 0, dufferLength);
+                    char[] buffer;
+                    buffer = new Char[bufferSize];
+                    read = _reader.Read(buffer, 0, buffer.Length);
                     if (read <= 0)
                     {
                         _start = 0;
                         _block = 0;
-                        _lave = 0;
                         _allBlock = 0;
                         return false;
                     }
                     StringBuilder stringBuilder = new StringBuilder();
                     foreach (char c in buffer)
                     {
-                        if (read == 20)
-                        {
-                            var ff = c;
-                        }
                         stringBuilder.Append(c);
                         read--;
                         if (read == 0)
@@ -233,7 +206,6 @@ namespace ConsoleFile
                     }
                     _start += bufferSize;
                     _reader.BaseStream.Seek(_start, SeekOrigin.Begin);
-                    _lave = length - bufferSize;
                 }
                 Thread.Sleep(500);
                 StringBuilder result = ReplaceString(line);
@@ -248,9 +220,9 @@ namespace ConsoleFile
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                mLogger.Info(e.ToString());
             }
-
+            
             return true;
         }
         //private bool FillBuffer()
